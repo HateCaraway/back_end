@@ -9,8 +9,6 @@ public enum ResultCodeEnum {
     SUCCESS(true, 20000, "提交成功"),
     UNKNOWN_REASON(false, 20001, "未知错误"),
 
-
-
     URL_ENCODE_ERROR(false, 23001, "URL编码失败"),
     ILLEGAL_CALLBACK_REQUEST_ERROR(false, 23002, "非法回调请求"),
     FETCH_ACCESSTOKEN_FAILD(false, 23003, "获取accessToken失败"),

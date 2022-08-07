@@ -24,7 +24,8 @@ import java.util.Map;
 @Service
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IUserService {
     @Resource
-    UserMapper userMapper;
+    private UserMapper userMapper;
+    @Override
     public RespBean findUser(String username, String password) {
         QueryWrapper <User> queryWrapper = new QueryWrapper <> ();
         queryWrapper.eq ( "username", username );
@@ -33,9 +34,28 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
             Map <String, Object> map1 = new HashMap <> ();
             String token = "123456789aaa";
             map1.put ( "token", token );
-            map1.put ( "message", "欢迎使用" );
+//            map1.put ( "message", "欢迎使用" );
             return RespBean.login_success ().data1 ( map1 );
         }
         else return RespBean.login_error ();
+    }
+
+    @Override
+    public Map<String, Object> findUser2(String username, String password) {
+        QueryWrapper <User> queryWrapper = new QueryWrapper <> ();
+        queryWrapper.eq ( "username", username );
+        queryWrapper.eq ( "password", password );
+        Map <String, Object> map1 = new HashMap <> ();
+        if(userMapper.selectCount ( queryWrapper )==1) {
+            String token = "123456789aaa";
+            map1.put ( "token", token );
+            map1.put ( "message", "欢迎使用" );
+            map1.put ( "status", true );
+            return map1;
+        }
+        else {
+            map1.put ( "status", true );
+            return map1;
+        }
     }
 }

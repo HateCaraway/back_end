@@ -1,5 +1,6 @@
 package com.jie.pojo;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.jie.utils.ResultCodeEnum;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -14,6 +15,7 @@ import java.util.Map;
  * @date: 2020/11/16
  * @author: cakin
  */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 @Data
 @ApiModel(value = "全局统一返回结果")
 public class R {
@@ -86,6 +88,12 @@ public class R {
         r.setSuccess( ResultCodeEnum.SUCCESS.getSuccess());
         r.setCode(ResultCodeEnum.SUCCESS.getCode());
         r.setMessage(ResultCodeEnum.SUCCESS.getMessage());
+        return r;
+    }
+    public static R ok1(){
+        R r = new R();
+        r.setSuccess( ResultCodeEnum.SUCCESS.getSuccess());
+        r.setCode(ResultCodeEnum.SUCCESS.getCode());
         return r;
     }
 

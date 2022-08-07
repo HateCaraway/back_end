@@ -30,5 +30,16 @@ public class UserController {
         String password = map.get ( "password" );
         return userService.findUser (username,password);
     }
+
+    @RequestMapping(value = "/login1",method = RequestMethod.GET)
+    public RespBean login2(@RequestParam String username,String password) {
+//        String username = map.get ( "username" );
+//        String password = map.get ( "password" );
+        Map <String, Object> user2 = userService.findUser2 ( username, password );
+        if(!(Boolean) user2.get("status")){
+            return RespBean.login_error ();
+        }
+        return RespBean.login_success ();
+    }
 }
 

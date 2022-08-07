@@ -8,6 +8,7 @@ import com.jie.mapper.UserDataMapper;
 import com.jie.pojo.R;
 import com.jie.pojo.UserData;
 
+import com.jie.utils.RespBean;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -15,7 +16,9 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.*;
 
 /**
@@ -97,4 +100,57 @@ public class UserDataController {
         maps.put ( "items",list );
         return  R.ok ().data (maps);
     }
+    @GetMapping("/statistics/dynamic")
+    public R send1(){
+        //获取当前日期，精确到年月日
+        LocalDate date=LocalDate.now (  );
+        //获取当前时间，精确到时分
+        Date nowTime=new Date (  );
+        SimpleDateFormat dateFormat1 = new SimpleDateFormat("HH:mm");
+        String nowtime1 = dateFormat1.format(nowTime);
+        //五分钟前的时间
+        Date now = new Date();
+        Date now_5 = new Date(now.getTime() - 100000);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//可以方便地修改日期格式
+        String nowTime_5 = dateFormat.format(now_5);
+        //查询
+        QueryWrapper<UserData> queryWrapper=new QueryWrapper <> (  );
+//        queryWrapper.like ("create_time",date);
+        queryWrapper.between ( "create_time",nowTime_5,now );
+//        queryWrapper.le ("create_time",nowTime);
+//        queryWrapper.ge ( "create_time" ,nowTime_5);
+        queryWrapper.like ( "accident_name","超车" );
+        int counts=userDataMapper.selectCount ( queryWrapper );
+        QueryWrapper<UserData> queryWrapper1=new QueryWrapper <> (  );
+//        queryWrapper.like ("create_time",date);
+//        queryWrapper.le ("create_time",nowTime);
+//        queryWrapper.ge ( "create_time" ,nowTime_5);
+        queryWrapper1.between ( "create_time",nowTime_5,now  );
+        queryWrapper1.like ( "accident_name","直行" );
+        int counts1=userDataMapper.selectCount ( queryWrapper1 );
+        QueryWrapper<UserData> queryWrapper2=new QueryWrapper <> (  );
+//        queryWrapper.like ("create_time",date);
+//        queryWrapper.le ("create_time",nowTime);
+//        queryWrapper.ge ( "create_time" ,nowTime_5);
+        queryWrapper2.between ( "create_time",nowTime_5,now  );
+        queryWrapper2.like ( "accident_name","追尾" );
+        int counts2=userDataMapper.selectCount ( queryWrapper2 );
+        QueryWrapper<UserData> queryWrapper3=new QueryWrapper <> (  );
+//        queryWrapper.like ("create_time",date);
+//        queryWrapper.le ("create_time",nowTime);
+//        queryWrapper.ge ( "create_time" ,nowTime_5);
+        queryWrapper3.between ( "create_time",nowTime_5,now );
+        queryWrapper3.like ( "accident_name","其他" );
+        int counts3=userDataMapper.selectCount ( queryWrapper3 );
+        Map<String,Object> map3=new TreeMap <> (  );
+        map3.put ( "date",date );
+        map3.put ( "time", nowtime1);
+        map3.put ( "超车事故",counts );
+        map3.put ( "直行事故",counts1 );
+        map3.put ( "追尾事故",counts2 );
+        map3.put ( "其他事故",counts3 );
+        return R.ok1 ().data ( map3 );
+    }
+
+
 }

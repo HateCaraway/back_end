@@ -18,21 +18,21 @@ class BackBlockchainApplicationTests {
 	//假数据生成
 	@Test
 	void test() {
-		for (int j=0; j <4; j++) {
+		for (int j=0; j <2; j++) {
 			UserData userData=new UserData ();
 			StringBuilder str = new StringBuilder ();//定义变长字符串
 			Random random = new Random ();
 //随机生成数字，并添加到字符串
-			for (int i = 0; i < 12; i++) {
+			for (int i = 0; i < 11; i++) {
 				str.append ( random.nextInt ( 10 ) );
 			}
 			userData.setUserId ( str.toString () );
-			userData.setAddress ( "重庆渝中区XXX大道" );
+			userData.setAddress ( "重庆渝北区XXX大道" );
 			userData.setAccidentType ( 3);
 			userData.setAddressLat ( "216.345" );
 			userData.setAddressLng ( "521.624" );
-			userData.setTime ( "2022-08-08 08:12:31" );
-			userData.setAccidentName ("超车事故");
+			userData.setTime ( "2022-08-07 19:29:31" );
+			userData.setAccidentName ("追尾事故");
 			userDataMapper.insert ( userData );
 
 		}
@@ -62,11 +62,11 @@ class BackBlockchainApplicationTests {
 		System.out.println ( json );
 
 	}
-//	@Test
-//	void deleteall(){
-//		QueryWrapper<UserData> queryWrapper=new QueryWrapper <> (  );
-//		queryWrapper.isNotNull ( "user_id" );
-//		userDataMapper.delete ( queryWrapper );
-//	}
+	@Test
+	void deleteall(){
+		QueryWrapper<UserData> queryWrapper=new QueryWrapper <> (  );
+		queryWrapper.between ( "id",2247,3482 );
+		userDataMapper.delete ( queryWrapper );
+	}
 }
 

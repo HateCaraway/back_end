@@ -15,7 +15,7 @@ import java.util.Map;
  * @date: 2020/11/16
  * @author: cakin
  */
-@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonInclude(JsonInclude.Include.NON_NULL)//空字段默认不返回
 @Data
 @ApiModel(value = "全局统一返回结果")
 public class R {

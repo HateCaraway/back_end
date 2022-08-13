@@ -3,6 +3,7 @@ package com.jie.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.jie.pojo.User;
 import com.jie.mapper.UserMapper;
+import com.jie.pojo.UserData;
 import com.jie.service.IUserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.jie.utils.RespBean;
@@ -25,6 +26,7 @@ import java.util.Map;
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IUserService {
     @Resource
     private UserMapper userMapper;
+
     @Override
     public RespBean findUser(String username, String password) {
         QueryWrapper <User> queryWrapper = new QueryWrapper <> ();
@@ -34,7 +36,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
             Map <String, Object> map1 = new HashMap <> ();
             String token = "123456789aaa";
             map1.put ( "token", token );
-//            map1.put ( "message", "欢迎使用" );
+            map1.put ( "message", "欢迎使用" );
             return RespBean.login_success ().data1 ( map1 );
         }
         else return RespBean.login_error ();
@@ -58,4 +60,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
             return map1;
         }
     }
+
+
+
 }

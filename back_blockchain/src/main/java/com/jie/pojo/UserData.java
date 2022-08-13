@@ -32,29 +32,17 @@ import net.sf.jsqlparser.expression.DateTimeLiteralExpression;
 public class UserData implements Serializable {
 
     private static final long serialVersionUID = 1L;
-
-    @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
-
-
-
-    @JsonProperty("user_id")
-    @JSONField(name = "user_id")
-
-    private String userId;
-    @JsonProperty("accident_type")
-    @JSONField(name = "accident_type")
-    private Integer accidentType;
-
-    private String address;
-    @JsonProperty("accident_name")
-    @JSONField(name = "accident_name")
-    private String accidentName;
+    @TableId(value = "accident_id", type = IdType.AUTO)
+    @JsonProperty("accident_id")
+    @JSONField(name = "accident_id")
+    private Integer accidentId;
+    private String status="未处理";
 
     @Override
     public String toString() {
         return "UserData{" +
-                "id=" + id +
+                "accidentId=" + accidentId +
+                ", status='" + status + '\'' +
                 ", userId='" + userId + '\'' +
                 ", accidentType=" + accidentType +
                 ", address='" + address + '\'' +
@@ -68,6 +56,36 @@ public class UserData implements Serializable {
                 ", addressLat='" + addressLat + '\'' +
                 '}';
     }
+
+    public Integer getAccidentId() {
+        return accidentId;
+    }
+
+    public void setAccidentId(Integer accidentId) {
+        this.accidentId = accidentId;
+    }
+
+    public String getStatus() {
+
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    @JsonProperty("user_id")
+    @JSONField(name = "user_id")
+
+    private String userId;
+    @JsonProperty("accident_type")
+    @JSONField(name = "accident_type")
+    private Integer accidentType;
+
+    private String address;
+    @JsonProperty("accident_name")
+    @JSONField(name = "accident_name")
+    private String accidentName;
 
     public String getAccidentName() {
         return accidentName;
@@ -102,13 +120,6 @@ public class UserData implements Serializable {
         return serialVersionUID;
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public String getUserId() {
         return userId;

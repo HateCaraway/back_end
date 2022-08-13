@@ -27,7 +27,7 @@ public class RespBean {
     @Override
     public String toString() {
         return "RespBean{" +
-                "success=" + success +
+//                "success=" + success +
                 ", code=" + code +
                 ", message='" + message + '\'' +
                 ", object=" + object +
@@ -50,17 +50,18 @@ public class RespBean {
     public void setData(Map <String, Object> data) {
         this.data = data;
     }
-    private boolean success;
-
-    public boolean isSuccess() {
-        return success;
-    }
-
-    public void setSuccess(boolean success) {
-        this.success = success;
-    }
+//    private boolean success;
+//
+//    public boolean isSuccess() {
+//        return success;
+//    }
+//
+//    public void setSuccess(boolean success) {
+//        this.success = success;
+//    }
 
     private long code;
+
     private String message;
     private Object object;
     private Map<String, Object> data = new HashMap<String, Object> ();
@@ -72,21 +73,46 @@ public class RespBean {
         RespBean respBean=new RespBean ();
         respBean.setCode (RespBeanEnum.SUCCESS.getCode ());
         respBean.setMessage (RespBeanEnum.SUCCESS.getMessage ());
-        respBean.setSuccess ( RespBeanEnum.SUCCESS.isSuccess () );
+//        respBean.setSuccess ( RespBeanEnum.SUCCESS.isSuccess () );
         return respBean;
     }
+    public static RespBean now_success(){
+        RespBean respBean=new RespBean ();
+        respBean.setMessage ( RespBeanEnum.NOW_SUCCESS.getMessage () );
+        respBean.setCode ( RespBeanEnum.NOW_SUCCESS.getCode () );
+        return respBean;
+    }
+
     public static RespBean login_success(){
         RespBean respBean=new RespBean ();
-        respBean.setSuccess ( RespBeanEnum.LOGIN_SUCCSEE.isSuccess () );
-        respBean.setMessage ( RespBeanEnum.LOGIN_SUCCSEE.getMessage () );
+//        respBean.setSuccess ( RespBeanEnum.LOGIN_SUCCSEE.isSuccess () );
+//        respBean.setMessage ( RespBeanEnum.LOGIN_SUCCSEE.getMessage () );
         respBean.setCode ( RespBeanEnum.LOGIN_SUCCSEE.getCode () );
         return respBean;
     }
     public static RespBean login_error(){
         RespBean respBean=new RespBean ();
-        respBean.setSuccess ( RespBeanEnum.LOGIN_ERROR.isSuccess () );
+//        respBean.setSuccess ( RespBeanEnum.LOGIN_ERROR.isSuccess () );
         respBean.setCode ( RespBeanEnum.LOGIN_ERROR.getCode () );
         respBean.setMessage ( RespBeanEnum.LOGIN_ERROR.getMessage () );
+        return respBean;
+    }
+    public static RespBean return_success(){
+        RespBean respBean=new RespBean ();
+//        respBean.setSuccess ( RespBeanEnum.RETURN_SUCCESS.isSuccess () );
+        respBean.setCode ( RespBeanEnum.RETURN_SUCCESS.getCode () );
+        respBean.setMessage ( RespBeanEnum.RETURN_SUCCESS.getMessage () );
+        return respBean;
+    }
+    public static RespBean update_status(){
+        RespBean respBean=new RespBean ();
+        respBean.setCode ( RespBeanEnum.UPDATE_STATUS.getCode () );
+        respBean.setMessage ( RespBeanEnum.UPDATE_STATUS.getMessage ());
+        return respBean;
+    }
+    public static RespBean data_show(){
+        RespBean respBean=new RespBean ();
+        respBean.setCode ( RespBeanEnum.SUCCESS.getCode () );
         return respBean;
     }
 

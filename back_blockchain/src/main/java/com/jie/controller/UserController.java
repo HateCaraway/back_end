@@ -3,6 +3,7 @@ package com.jie.controller;
 
 
 import com.jie.mapper.UserMapper;
+import com.jie.pojo.User;
 import com.jie.service.impl.UserServiceImpl;
 import com.jie.utils.RespBean;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,22 +25,24 @@ import java.util.Map;
 public class UserController {
     @Autowired
     UserServiceImpl userService;
-    @RequestMapping(value = "/login",method = RequestMethod.GET)
-    public RespBean login1(@RequestParam Map<String,String> map) {
+
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public RespBean login1(@RequestBody Map <String, String> map) {
         String username = map.get ( "username" );
         String password = map.get ( "password" );
-        return userService.findUser (username,password);
+        return userService.findUser ( username, password );
     }
 
-    @RequestMapping(value = "/login1",method = RequestMethod.GET)
-    public RespBean login2(@RequestParam String username,String password) {
-//        String username = map.get ( "username" );
-//        String password = map.get ( "password" );
-        Map <String, Object> user2 = userService.findUser2 ( username, password );
-        if(!(Boolean) user2.get("status")){
-            return RespBean.login_error ();
-        }
-        return RespBean.login_success ();
-    }
+//    @RequestMapping(value = "/login1",method = RequestMethod.GET)
+//    public RespBean login2(@RequestParam String username,String password) {
+////        String username = map.get ( "username" );
+////        String password = map.get ( "password" );
+//        Map <String, Object> user2 = userService.findUser2 ( username, password );
+//        if(!(Boolean) user2.get("status")){
+//            return RespBean.login_error ();
+//        }
+//        return RespBean.login_success ();
+//    }
+//}
+
 }
-
